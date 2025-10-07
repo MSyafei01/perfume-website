@@ -1,10 +1,10 @@
     export const COMPANY_INFO = {
     name: "Luxury Perfume Collection",
-    phone: "+6281234567890",
-    whatsapp: "6281234567890",
+    phone: "+6282142144412",
+    whatsapp: "6282142144412",
     tiktok: "@luxuryperfume",
     email: "info@luxuryperfume.com",
-    address: "Jakarta, Indonesia"
+    address: "Jember, Indonesia"
     };
 
     export const SOCIAL_LINKS = {
