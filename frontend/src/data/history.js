@@ -3,14 +3,14 @@
         year: "1921",
         title: "Chanel No. 5",
         description: "Diluncurkan oleh Coco Chanel, menjadi parfum pertama yang menggunakan aldehid secara masif, menciptakan aroma abstrak yang revolusioner.",
-        image: "/images/history/chanel-history.jpg"
+        image: "/images/perfumes/chanel-no5.jpg"
     },
 
     {
         year: "1947",
         title: "Miss Dior",
         description: "Diciptakan untuk merayakan kebebasan perempuan pasca Perang Dunia II, menjadi simbol femininitas dan kemewahan.",
-        image: "/images/history/missdior-history.jpg"
+        image: "/images/perfumes/dior-sauvage.jpg"
     },
 
     {
