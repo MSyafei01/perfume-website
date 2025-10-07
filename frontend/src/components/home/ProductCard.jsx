@@ -13,15 +13,28 @@
         className="bg-white rounded-2xl shadow-lg overflow-hidden perfume-card group"
         whileHover={{ y: -10 }}
         >
-        {/* Product Image */}
+
+        {/* Product Image - FIXED VERSION */}
         <div className="relative h-64 overflow-hidden bg-gray-100">
+            {product.image ? (
+            <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
-            <span className="text-gray-400 text-sm">Gambar {product.name}</span>
+                <span className="text-gray-400 text-sm">No Image</span>
             </div>
+            )}
             <div className="absolute top-4 right-4">
-            <span className="bg-accent text-white px-3 py-1 rounded-full text-sm font-medium">
+            {product.bestSeller && (
+                <span className="bg-accent text-white px-3 py-1 rounded-full text-sm font-medium">
                 Best Seller
-            </span>
+                </span>
+            )}
             </div>
         </div>
 
@@ -70,4 +83,4 @@
     );
     };
 
-    export default ProductCard; 
+    export default ProductCard;
