@@ -21,5 +21,5 @@ Website e-commerce untuk penjualan parfum premium dengan React.js, Next.js, dan 
 
 1. Clone repository:
 ```bash
-git clone <repository-url>
+git clone https://msyafei01.github.io/perfume-website/
 cd perfume-website
