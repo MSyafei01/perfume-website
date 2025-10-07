@@ -1,0 +1,156 @@
+perfume-website/
+├── frontend/                 # Next.js Application
+│   ├── public/
+│   │   ├── images/
+│   │   │   ├── perfumes/
+│   │   │   ├── logos/
+│   │   │   └── backgrounds/
+│   │   ├── icons/
+│   │   └── favicon.ico
+│   ├── src/
+│   │   ├── app/              # App Router (Next.js 13+)
+│   │   │   ├── globals.css
+│   │   │   ├── layout.js
+│   │   │   ├── page.js       # Home page
+│   │   │   ├── about/
+│   │   │   │   └── page.js
+│   │   │   ├── products/
+│   │   │   │   └── page.js
+│   │   │   ├── contact/
+│   │   │   │   └── page.js
+│   │   │   └── api/          # API routes (jika perlu)
+│   │   ├── components/
+│   │   │   ├── common/
+│   │   │   │   ├── Header.jsx
+│   │   │   │   ├── Footer.jsx
+│   │   │   │   ├── Navigation.jsx
+│   │   │   │   ├── WhatsAppFloat.jsx
+│   │   │   │   └── LoadingSpinner.jsx
+│   │   │   ├── home/
+│   │   │   │   ├── HeroSection.jsx
+│   │   │   │   ├── BestSeller.jsx
+│   │   │   │   └── ProductCard.jsx
+│   │   │   ├── about/
+│   │   │   │   ├── HistorySection.jsx
+│   │   │   │   └── Timeline.jsx
+│   │   │   ├── products/
+│   │   │   │   ├── ProductGrid.jsx
+│   │   │   │   ├── ProductFilter.jsx
+│   │   │   │   └── ProductModal.jsx
+│   │   │   └── contact/
+│   │   │       ├── ContactForm.jsx
+│   │   │       └── SocialLinks.jsx
+│   │   ├── data/
+│   │   │   ├── products.js
+│   │   │   ├── history.js
+│   │   │   └── constants.js
+│   │   ├── styles/
+│   │   │   ├── components/
+│   │   │   ├── animations.css
+│   │   │   └── responsive.css
+│   │   ├── hooks/
+│   │   │   ├── useProducts.js
+│   │   │   └── useAnimation.js
+│   │   └── utils/
+│   │       ├── helpers.js
+│   │       └── animations.js
+│   ├── package.json
+│   ├── next.config.js
+│   ├── tailwind.config.js    # Jika menggunakan Tailwind CSS
+│   └── jsconfig.json
+├── backend/                  # PHP API (opsional)
+│   ├── api/
+│   │   ├── products/
+│   │   │   └── index.php
+│   │   ├── orders/
+│   │   │   └── index.php
+│   │   └── config/
+│   │       └── database.php
+│   ├── admin/                # Panel admin (opsional)
+│   └── .htaccess
+├── docs/                     # Untuk GitHub Pages deployment
+├── .github/
+│   └── workflows/
+│       └── deploy.yml        # GitHub Actions untuk deploy
+├── .gitignore
+├── README.md
+└── package.json             # Root package.json
+
+
+──────────────────────────────────────────────────────────────────────────────────────
+
+Frontend (Next.js) - File Utama:
+frontend/src/app/layout.js - Root layout
+
+frontend/src/app/page.js - Home page
+
+frontend/src/app/about/page.js - About page
+
+frontend/src/app/products/page.js - Products page
+
+frontend/src/app/contact/page.js - Contact page
+
+Komponen Penting:
+frontend/src/components/common/WhatsAppFloat.jsx - Floating WA button
+
+frontend/src/components/home/BestSeller.jsx - Best seller section
+
+frontend/src/components/about/HistorySection.jsx - Sejarah parfum
+
+frontend/src/components/products/ProductGrid.jsx - Grid produk
+
+frontend/src/data/products.js - Data produk
+
+Konfigurasi:
+frontend/next.config.js - Konfigurasi Next.js
+
+frontend/tailwind.config.js - Konfigurasi styling
+
+.github/workflows/deploy.yml - Auto deploy ke GitHub Pages
+
+🎨 Rekomendasi Teknologi & Warna:
+Warna Elegant 2025:
+
+Primary: #2A2D34 (Dark Charcoal)
+
+Secondary: #F5F5F5 (Light Gray)
+
+Accent: #D4AF37 (Gold)
+
+Text: #333333 (Dark Gray)
+
+Background: #FFFFFF (White)
+
+Animasi & Transisi:
+
+Framer Motion untuk animasi kompleks
+
+CSS transitions untuk efek halus
+
+Hover effects dengan transform scale
+
+Loading animations dengan skeleton screens
+
+🚀 Deployment ke GitHub Pages:
+Struktur ini sudah disiapkan untuk deploy ke GitHub Pages dengan:
+
+Static Export dari Next.js
+
+GitHub Actions untuk automated deployment
+
+Folder docs/ sebagai build output
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
