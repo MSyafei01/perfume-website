@@ -1,6 +1,7 @@
     'use client';
     import { motion } from 'framer-motion';
     import { SOCIAL_LINKS } from '@/data/constants';
+    import Image from 'next/image';
 
     const ProductCard = ({ product }) => {
     const handleOrder = (productName) => {
@@ -13,7 +14,6 @@
         className="bg-white rounded-2xl shadow-lg overflow-hidden perfume-card group"
         whileHover={{ y: -10 }}
         >
-
         {/* Product Image - FIXED VERSION */}
         <div className="relative h-64 overflow-hidden bg-gray-100">
             {product.image ? (

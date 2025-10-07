@@ -1,6 +1,7 @@
     'use client';
     import { motion } from 'framer-motion';
     import { perfumeHistory } from '@/data/history';
+    import Image from 'next/image';
 
     const HistorySection = () => {
     return (
@@ -35,12 +36,22 @@
                     index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
                 >
-                {/* Image */}
+                {/* Image - FIXED VERSION */}
                 <div className="md:w-1/2 mb-6 md:mb-0">
-                    <div className="relative rounded-2xl overflow-hidden shadow-lg hover-lift">
-                    <div className="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                    <div className="relative rounded-2xl overflow-hidden shadow-lg hover-lift h-64">
+                    {item.image ? (
+                        <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                    ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
                         <span className="text-gray-400">Gambar {item.title}</span>
-                    </div>
+                        </div>
+                    )}
                     <div className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-300"></div>
                     </div>
                 </div>
