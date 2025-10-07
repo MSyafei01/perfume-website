@@ -5,7 +5,7 @@
         description: "Parfum legendaris dengan aroma bunga yang elegan dan timeless",
         price: "Rp 1.250.000",
         originalPrice: "Rp 1.600.000",
-        image: "frontend/public/images/perfumes/chanel-no5.jpg",
+        image: "/images/perfumes/chanel-no5.jpg",
         category: "Floral",
         bestSeller: true,
         notes: ["Bergamot", "Ylang-Ylang", "Sandalwood"]
@@ -15,7 +15,7 @@
         name: "Dior Sauvage",
         description: "Aroma segar dan maskulin dengan sentuhan amberwood",
         price: "Rp 1.100.000",
-        originalPrice: "Rp 1.350.000",
+        originalPrice: "Rp 1.400.000",
         image: "/images/perfumes/dior-sauvage.jpg",
         category: "Woody",
         bestSeller: true,
