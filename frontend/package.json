@@ -9,14 +9,12 @@
         "lint": "next lint",
         "export": "next build && next export"
     },
-
     "dependencies": {
         "framer-motion": "^10.16.0",
         "next": "14.0.0",
         "react": "^18.0.0",
         "react-dom": "^18.0.0"
     },
-
     "devDependencies": {
         "autoprefixer": "^10.4.21",
         "eslint": "^8.0.0",
@@ -38,6 +36,5 @@
         "last 1 safari version"
         ]
     }
-
-}
+    }
 

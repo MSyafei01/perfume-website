@@ -2,11 +2,11 @@
 const nextConfig = {
     output: 'export',
     trailingSlash: true,
-    basePath: '/perfume-website',
+    basePath: process.env.NODE_ENV === 'production' ? '/perfume-website' : '',
     images: {
-    unoptimized: true
+        unoptimized: true
     },
     assetPrefix: process.env.NODE_ENV === 'production' ? '/perfume-website' : '',
-}
+    }
 
 module.exports = nextConfig
