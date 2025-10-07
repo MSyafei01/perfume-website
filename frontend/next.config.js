@@ -2,6 +2,7 @@
 const nextConfig = {
     output: 'export',
     trailingSlash: true,
+    basePath: '/perfume-website',
     images: {
     unoptimized: true
     },
