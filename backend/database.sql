@@ -54,4 +54,4 @@ INSERT INTO products (name, description, price, original_price, image, category,
 
 -- Insert admin user (password: admin123)
 INSERT INTO admin_users (username, password_hash, full_name, email) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', 'admin@luxuryperfume.com');
+('admin', 'admin123', 'Administrator', 'admin@luxuryperfume.com');
