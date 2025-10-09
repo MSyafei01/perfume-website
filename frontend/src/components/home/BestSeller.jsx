@@ -1,9 +1,55 @@
     'use client';
     import { motion } from 'framer-motion';
-    import { bestSellers } from '@/data/products';
+    import { fetchBestSellers } from '@/data/products';
     import ProductCard from '@/components/home/ProductCard';
+    import { useState, useEffect } from 'react';  // ← PASTIKAN IMPORT useEffect
 
     const BestSeller = () => {
+    const [bestSellers, setBestSellers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadBestSellers = async () => {
+        try {
+            setLoading(true);
+            const products = await fetchBestSellers();
+            setBestSellers(products);
+        } catch (error) {
+            console.error('Failed to load best sellers:', error);
+        } finally {
+            setLoading(false);
+        }
+        };
+
+        loadBestSellers();
+    }, []);
+
+
+    if (loading) {
+        return (
+        <section className="py-20 bg-secondary">
+            <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+                Best Seller
+                </h2>
+                <p className="text-text">Loading products...</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[1, 2, 3].map(item => (
+                <div key={item} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
+                    <div className="h-64 bg-gray-200 rounded-lg mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                </div>
+                ))}
+            </div>
+            </div>
+        </section>
+        );
+    }
+
+
     return (
         <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
@@ -38,6 +84,12 @@
             ))}
             </div>
 
+            {bestSellers.length === 0 && (
+            <div className="text-center py-8">
+                <p className="text-text">Tidak ada produk best seller saat ini.</p>
+            </div>
+            )}
+
             <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -56,4 +108,4 @@
     );
     };
 
-    export default BestSeller;
+export default BestSeller;

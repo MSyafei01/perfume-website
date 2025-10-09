@@ -1,4 +1,6 @@
-    export const products = [
+    const API_BASE_URL = 'http://localhost:8000/api';
+
+    const fallbackProducts = [
     {
         id: 1,
         name: "Chanel No. 5",
@@ -67,8 +69,95 @@
     }
     ];
 
-    export const bestSellers = [
-    products[0],
-    products[1],
-    products[2]
-    ];
+        // Fetch semua products dari API
+    export const fetchProducts = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/products`);
+        
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Transform data dari API ke format frontend
+        return data.data.map(product => ({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: `Rp ${formatPrice(product.price)}`,
+        originalPrice: product.original_price ? `Rp ${formatPrice(product.original_price)}` : null,
+        image: product.image,
+        category: product.category,
+        bestSeller: product.best_seller,
+        notes: product.notes || [],
+        stock: product.stock
+        }));
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        // Return fallback data jika API error
+        return fallbackProducts;
+    }
+    };
+
+    // Fetch best sellers dari API
+    export const fetchBestSellers = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/products?best_sellers=1`);
+        
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        return data.data.map(product => ({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: `Rp ${formatPrice(product.price)}`,
+        originalPrice: product.original_price ? `Rp ${formatPrice(product.original_price)}` : null,
+        image: product.image,
+        category: product.category,
+        bestSeller: product.best_seller,
+        notes: product.notes || []
+        }));
+    } catch (error) {
+        console.error('Error fetching best sellers:', error);
+        return fallbackProducts.filter(product => product.bestSeller);
+    }
+    };
+
+    // Helper function untuk format harga
+    const formatPrice = (price) => {
+    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+    return new Intl.NumberFormat('id-ID').format(numPrice);
+    };
+
+    // Create order di backend
+    export const createOrder = async (orderData) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+        });
+
+        if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error creating order:', error);
+        throw error;
+    }
+    };
+
+    export { fallbackProducts as products };
+    export const bestSellers = fallbackProducts.filter(product => product.bestSeller);
+    export const categories = [...new Set(fallbackProducts.map(product => product.category))];
+    

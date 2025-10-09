@@ -1,12 +1,51 @@
     'use client';
     import { motion } from 'framer-motion';
     import { SOCIAL_LINKS } from '@/data/constants';
-    import Image from 'next/image';
+    import { createOrder } from '@/data/products';
+    import { useState } from 'react';
 
     const ProductCard = ({ product }) => {
-    const handleOrder = (productName) => {
+    const [isOrdering, setIsOrdering] = useState(false);
+
+    const handleOrder = async (productName, productId, productPrice) => {
+        try {
+        setIsOrdering(true);
+        
+        // Create order data
+        const orderData = {
+            customer_name: 'Customer', // Bisa diganti dengan form input
+            customer_phone: '08123456789', // Bisa diganti dengan form input  
+            customer_email: 'customer@example.com',
+            products: [
+            {
+                id: productId,
+                name: productName,
+                price: productPrice,
+                quantity: 1
+            }
+            ]
+        };
+
+        // Send order to backend
+        const result = await createOrder(orderData);
+        
+        // Redirect to WhatsApp dengan link dari backend
+        if (result.data && result.data.whatsapp_link) {
+            window.open(result.data.whatsapp_link, '_blank');
+        } else {
+            // Fallback ke WhatsApp default
+            const message = `Halo, saya ingin memesan ${productName}. Bisa info lebih lanjut?`;
+            window.open(`${SOCIAL_LINKS.whatsapp}&text=${encodeURIComponent(message)}`, '_blank');
+        }
+        
+        } catch (error) {
+        console.error('Order failed:', error);
+        // Fallback ke WhatsApp langsung jika API error
         const message = `Halo, saya ingin memesan ${productName}. Bisa info lebih lanjut?`;
         window.open(`${SOCIAL_LINKS.whatsapp}&text=${encodeURIComponent(message)}`, '_blank');
+        } finally {
+        setIsOrdering(false);
+        }
     };
 
     return (
@@ -14,15 +53,13 @@
         className="bg-white rounded-2xl shadow-lg overflow-hidden perfume-card group"
         whileHover={{ y: -10 }}
         >
-        {/* Product Image - FIXED VERSION */}
+        {/* Product Image */}
         <div className="relative h-64 overflow-hidden bg-gray-100">
             {product.image ? (
-            <Image
+            <img
                 src={product.image}
                 alt={product.name}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
             ) : (
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
@@ -71,12 +108,17 @@
 
             {/* Order Button */}
             <motion.button
-            onClick={() => handleOrder(product.name)}
-            className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors duration-300 group-hover:bg-accent"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            onClick={() => handleOrder(product.name, product.id, product.price)}
+            disabled={isOrdering}
+            className={`w-full py-3 rounded-lg font-semibold transition-colors duration-300 ${
+                isOrdering 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : 'bg-primary text-white hover:bg-primary/90 group-hover:bg-accent'
+            }`}
+            whileHover={!isOrdering ? { scale: 1.02 } : {}}
+            whileTap={!isOrdering ? { scale: 0.98 } : {}}
             >
-            Pesan Sekarang
+            {isOrdering ? 'Memproses...' : 'Pesan Sekarang'}
             </motion.button>
         </div>
         </motion.div>

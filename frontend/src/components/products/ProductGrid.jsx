@@ -1,13 +1,32 @@
     'use client';
-    import { useState, useMemo } from 'react';
+    import { useState, useMemo, useEffect } from 'react';  // ← TAMBAH useEffect DI SINI
     import { motion } from 'framer-motion';
-    import { products } from '@/data/products';
+    import { fetchProducts } from '@/data/products';
     import ProductCard from '@/components/home/ProductCard';
 
     const ProductGrid = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [sortBy, setSortBy] = useState('name');
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        const loadProducts = async () => {
+        try {
+            setLoading(true);
+            const productsData = await fetchProducts();
+            setProducts(productsData);
+        } catch (error) {
+            console.error('Failed to load products:', error);
+        } finally {
+            setLoading(false);
+        }
+        };
+
+        loadProducts();
+    }, []);
+
+    
     const categories = ['All', ...new Set(products.map(product => product.category))];
 
     const filteredAndSortedProducts = useMemo(() => {
@@ -20,19 +39,45 @@
         return filtered.sort((a, b) => {
         switch (sortBy) {
             case 'price':
-            return parseFloat(a.price.replace(/[^\d]/g, '')) - parseFloat(b.price.replace(/[^\d]/g, ''));
+            const priceA = parseFloat(a.price.replace(/[^\d]/g, ''));
+            const priceB = parseFloat(b.price.replace(/[^\d]/g, ''));
+            return priceA - priceB;
             case 'name':
             return a.name.localeCompare(b.name);
             default:
             return 0;
         }
         });
-    }, [selectedCategory, sortBy]);
+    }, [selectedCategory, sortBy, products]);
+
+    if (loading) {
+    return (
+        <section className="py-20 bg-secondary min-h-screen">
+            <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+                Koleksi Parfum Premium
+                </h1>
+                <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3, 4, 5, 6].map(item => (
+                <div key={item} className="bg-white rounded-2xl shadow-lg p-6 animate-pulse">
+                    <div className="h-64 bg-gray-200 rounded-lg mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2 mb-4"></div>
+                    <div className="h-8 bg-gray-200 rounded"></div>
+                </div>
+                ))}
+            </div>
+            </div>
+        </section>
+        );
+    }
 
     return (
         <section className="py-20 bg-secondary min-h-screen">
         <div className="container mx-auto px-4">
-            {/* Header */}
             <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,7 +148,7 @@
             </motion.div>
 
             {/* Empty State */}
-            {filteredAndSortedProducts.length === 0 && (
+            {filteredAndSortedProducts.length === 0 && !loading && (
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
