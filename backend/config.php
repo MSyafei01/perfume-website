@@ -2,7 +2,7 @@
 // Konfigurasi MySQL
 define('DB_HOST', 'localhost');      // Host MySQL
 define('DB_USER', 'root');           // Username MySQL  
-define('DB_PASS', 'admin123');    // Password MySQL kamu
+define('DB_PASS', '');    // Password MySQL kamu
 define('DB_NAME', 'perfume_website'); // Nama database
 
 // Upload settings
