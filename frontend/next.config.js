@@ -1,12 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+    /** @type {import('next').NextConfig} */
+    const nextConfig = {
     output: 'export',
     trailingSlash: true,
-    basePath: process.env.NODE_ENV === 'production' ? '/perfume-website' : '',
     images: {
         unoptimized: true
     },
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/perfume-website' : '',
     }
-
-module.exports = nextConfig
+    module.exports = nextConfig
